@@ -13,8 +13,14 @@ class RoleMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    // Add , $role at the end here
+    public function handle(Request $request, Closure $next, $role): Response
     {
-        return $next($request);
+        if (!auth()->check() || auth()->user()->role !== $role) {
+        // Redirect home or show an unauthorized error
+        abort(403, 'Unauthorized action.');
+    }
+
+    return $next($request);
     }
 }
