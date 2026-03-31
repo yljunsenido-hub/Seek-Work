@@ -6,7 +6,11 @@ use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\EmployerController;
 use Illuminate\Support\Facades\Route;
 
-Route::permanentRedirect('/', '/login');
+// Route::permanentRedirect('/', '/login');
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
