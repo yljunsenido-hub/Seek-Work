@@ -35,4 +35,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function company()
+    {
+        // Usually, one user manages one company
+        return $this->hasOne(Companies::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

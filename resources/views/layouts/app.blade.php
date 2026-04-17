@@ -7,30 +7,38 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        
+        {{-- 1. Main Wrapper with Flex --}}
+        <div class="min-h-screen bg-gray-100 flex">
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            {{-- 2. Sidebar (Fixed width) --}}
+            <x-sidebar />
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{-- 3. Content Area (Grows to fill remaining space) --}}
+            {{-- We add ml-64 to prevent the content from going UNDER the fixed sidebar --}}
+            <div class="flex-1 ml-64 flex flex-col">
+                
+                {{-- Top Navigation (For Profile/Logout) --}}
+                @include('layouts.navigation')
+
+                @isset($header)
+                    <header class="bg-white shadow">
+                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endisset
+
+                <main class="p-6">
+                    {{ $slot }}
+                </main>
+                
+            </div>
         </div>
     </body>
 </html>

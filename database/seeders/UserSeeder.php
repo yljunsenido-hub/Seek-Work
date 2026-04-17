@@ -36,5 +36,19 @@ class UserSeeder extends Seeder
             'role' => 'employer', 
         ]);
 
+        User::create([
+            'name' => 'Employer1',
+            'email' => 'employer1@gmail.com',
+            'password' => Hash::make('user12345'), // Always hash passwords!
+            'role' => 'employer', 
+        ]);
+
+        User::create([
+            'name' => 'Employer2',
+            'email' => 'employer2@gmail.com',
+            'password' => Hash::make('user12345'), // Always hash passwords!
+            'role' => 'employer', 
+        ]);
+
     }
 }
